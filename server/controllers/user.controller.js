@@ -1,7 +1,7 @@
 const {User} = require('../models/user.model');
 const jwt = require("jsonwebtoken");
-const bcrypt = require('brcypt');
-require("dotenv").config();
+const bcrypt = require('bcrypt');
+// require("dotenv").config();
 
 module.exports.findUser = (req,res) => {
     User.findOne({_id: req.params.id })
@@ -9,7 +9,7 @@ module.exports.findUser = (req,res) => {
         .catch(err => res.json(err))
 }
 
-module.exports.getAllUsers = (req,res) => {
+module.exports.getAll = (req,res) => {
     User.find({})
         .then(user => res.json(user))
         .catch(err => res.json(err))
@@ -25,13 +25,14 @@ module.exports.register = (req,res) => {
                 .cookie("userToken", userToken, {
                     httpOnly: true
                 })
-                .json({ msg: "success!", user: user, token: userToken});
+                .json({ msg: "success!", user: user, token: userToken}
+                );
         })
         .catch(err => res.status(400).json(err));
 }
 
 module.exports.login = async (req,res) => {
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne({ firstName: req.body.firstName })
         .catch(err => res.status(400).json(err));
         if (user === null) {
             return res.sendStatus(400);

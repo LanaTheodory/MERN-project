@@ -6,8 +6,7 @@ const Schema = mongoose.Schema;
 
 const commentSchema = Schema(
   {
-    _id: Schema.Types.ObjectId,
-    commentContent: {String,required: true},
+    commentContent: {type:String, required: true},
     user: { type: Schema.Types.ObjectId, ref: "User" },
     post: { type: Schema.Types.ObjectId, ref: "Post" },
   },

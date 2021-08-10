@@ -5,9 +5,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = Schema(
   {
-    _id: { type: Schema.Types.ObjectId },
-    postContent: { type: String ,
-      required: true},
+  
+    postContent: { type: String , required: true},
     user: { type: Schema.Types.ObjectId, ref: "User" },
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     likes: [{ type: Schema.Types.ObjectId, ref: "Like" }],
