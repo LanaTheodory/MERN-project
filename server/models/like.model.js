@@ -1,3 +1,4 @@
+//Like Just for Posts
 const { User } = require("./user.model");
 const { Post } = require("./post.model");
 
