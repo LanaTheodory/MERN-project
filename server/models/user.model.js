@@ -3,43 +3,24 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
-    firstName: { 
+    name: { 
         type: String,
         required: [
             true,
-            "First name is required"
+            "Name is required"
         ] 
-    },
-    lastName: { 
-        type: String,
-        required: [
-            true,
-            "Last name is required"
-        ]
     },
     profilePicture: { 
         type: String 
     },
     motto: { 
-        type: String,
-        required: [
-            true,
-            "Motto is required"
-        ] 
+        type: String 
     },
     badgeNumber: { 
-        type: Number,
-        required: [
-            true,
-            "Badge Number is required"
-        ] 
+        type: Number
     },
     phoneNumber: { 
-        type: Number,
-        required: [
-            true,
-            "Phone Number is required"
-        ]
+        type: Number
      },
     email: { 
         type: String ,

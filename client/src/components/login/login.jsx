@@ -1,14 +1,11 @@
 import React from 'react';
-import loginImg from '../../axsos-logo.png';
-
-const login = (props) => {
+import './style.scss';
+const Login = (props) => {
     return (
         <div className="base-container">
-            <div className="Login"></div>
+            <div className="Login"><h1>Login</h1></div>
             <div className="content">
-                <div className="image">
-                    <img src={loginImg}/>
-                </div>
+             
                 <div className="form">
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
@@ -29,4 +26,4 @@ const login = (props) => {
     )
 }
 
-export default login;
+export default Login;
