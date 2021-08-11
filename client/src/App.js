@@ -8,12 +8,17 @@ import MainPage from './views/MainPage';
 function App() {
   return (
     <div className="App">
+      {/* <Registeration /> */}
+   
+     
+
      <Router>
       <Registeration path="/register" />
       <Header path="/" pageTitle="Axsos" />
        <MainPage path="/"></MainPage>
      </Router>
      <Header/>
+   
     </div>
   );
 }

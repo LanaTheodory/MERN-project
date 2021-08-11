@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
+import Header from '../components/login/Header';
 import CreatePost from '../components/PostComponent/CreatePost';
 import Post from '../components/PostComponent/Post'
 
@@ -16,13 +17,14 @@ const MainPage = () => {
     }, [])
     return (
         <div>
-      
+            
+             <Header pageTitle="Axsos" /> 
             <CreatePost label="what are you struggling with?"></CreatePost>
              {/* {posts.map((post , i) =>{
-               
-              <div key={i}> <Post key={i} content={post} user={post.user}/> </div>
+            
+             <Post content={post.postContent} user={post.user}/> 
         } )} */}
-           <Post content="my first possstttttt" user="lanaTheodory"/>
+          <Post content="Struggling with react " user="lanaTheodory"/>
            
         </div>
     )
