@@ -11,7 +11,7 @@ import { navigate } from "@reach/router";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import clsx from "clsx";
 
@@ -28,76 +28,78 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "@reach/router";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-    },
-    root: {
-        flexGrow: 1,
-      },
-      menuButton: {
-        marginRight: theme.spacing(2),
-      },
-      title: {
-        flexGrow: 1,
-      },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-      justifyContent: 'flex-end',
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: -drawerWidth,
-    },
-    contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    },
-  }));
+  root: {
+    display: "flex",
+  },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+}));
 const Header = (props) => {
-    const theme = useTheme();
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const classes = useStyles();
+
   const homeIcon = (e) => {
     e.preventDefault();
     navigate("/");
@@ -118,9 +120,11 @@ const Header = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const handleLogeToAXSOSPage = () => {
+    window.open("https://academy.axsos.ps/");
+  };
 
   return (
-        
     <div className={classes.root}>
       <AppBar
         position="static"
@@ -147,8 +151,21 @@ const Header = (props) => {
               paper: classes.drawerPaper,
             }}
           >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
+            <div className={classes.drawerHeader} style={{
+          backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+        }} >
+              <IconButton onClick={handleDrawerClose} style={{
+          backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+        }}>
+                <p  >
+                  <button onClick={handleLogeToAXSOSPage} style={{backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)", border:"white"}}>
+                    <img
+                      width="200px"
+                      src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
+                    />
+                  </button>
+                </p>
+
                 {theme.direction === "ltr" ? (
                   <ChevronLeftIcon />
                 ) : (
@@ -157,7 +174,11 @@ const Header = (props) => {
               </IconButton>
             </div>
             <Divider />
-            <List>
+            <List
+              style={{
+                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+              }}
+            >
               {["Inbox", "Starred", "Send email", "Drafts"].map(
                 (text, index) => (
                   <ListItem button key={text}>
@@ -170,7 +191,11 @@ const Header = (props) => {
               )}
             </List>
             <Divider />
-            <List>
+            <List
+              style={{
+                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+              }}
+            >
               {["All mail", "Trash", "Spam"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>

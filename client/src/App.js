@@ -12,7 +12,7 @@ function App() {
       {/* <Registeration /> */}
       <Header pageTitle="Axsos" />
      <Router>
-       <MainPage path="/"></MainPage>
+       {/* <MainPage path="/"></MainPage> */}
      </Router>
     </div>
   );
