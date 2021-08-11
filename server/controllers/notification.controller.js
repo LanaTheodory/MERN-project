@@ -4,13 +4,14 @@ const { Notification } = require('../models/notification.model');
     /////// to create a Notification///////////////////
 
 module.exports.createNotification = (request, response) => {
-    const { sender, receiver } = request.body;
+    const { sender, receiver, type } = request.body;
+
 
     Notification.create({
         sender,
         receiver,
-
-        message: "you have received a new notification on your post",
+        type,
+        
      
      
     })

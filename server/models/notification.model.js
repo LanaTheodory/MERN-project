@@ -16,7 +16,11 @@ notificationSchema = new Schema(
   {
     sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Notification creator
     receiver: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Id of the receivers of the notification
-    message: {type: String },
+    type: {
+      type: String,
+      enum:["like", "comment"], 
+      default: "like"
+    },
    
   },
   { timestamps: true }
