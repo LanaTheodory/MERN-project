@@ -9,10 +9,10 @@ import MainPage from './views/MainPage';
 function App() {
   return (
     <div className="App">
-      {/* <Registeration /> */}
-      <Header pageTitle="Axsos" />
      <Router>
-       <MainPage path="/"></MainPage>
+      <Registeration path="/register" />
+      <Header path="/" pageTitle="Axsos" />
+       {/* <MainPage path="/"></MainPage> */}
      </Router>
     </div>
   );

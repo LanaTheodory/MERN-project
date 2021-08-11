@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import {navigate} from '@reach/router';
+
 import './style.scss';
 const Login = (props) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginUser = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8000/api/login', { email, password }).then(()=>navigate('/')).catch(console.error)
+    }
+
     return (
         <div className="base-container">
             <div className="Login"><h1>Login</h1></div>
             <div className="content">
-             
-                <div className="form">
+
+                <form className="form" onSubmit={loginUser}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="text" name="email" placeholder="Email"/>
+                        <input type="text" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" placeholder="Password"/>
+                        <input type="password" name="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                </div>
-            </div>
-            <div className="footer">
-                <button type="button" className="btn">
-                    Login
-                </button>
+                    <div className="footer">
+                        <button type="submit" className="btn">
+                            Login
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     )
