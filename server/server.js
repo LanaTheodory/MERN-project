@@ -1,11 +1,13 @@
+require('dotenv').config({path:__dirname+'/.env'});
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const cookieParser = require("cookie-parser");
 require('./config/mongoose.config'); 
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
-require('dotenv').config();
+app.use(cookieParser());
 require('./routes/user.routes')(app);
 require('./routes/post.routes')(app);
 require('./routes/comment.routes')(app);

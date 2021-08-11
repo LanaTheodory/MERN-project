@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -12,15 +11,10 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-
 import clsx from "clsx";
-
 import Drawer from "@material-ui/core/Drawer";
-
 import List from "@material-ui/core/List";
-
 import Divider from "@material-ui/core/Divider";
-
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
@@ -29,6 +23,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -151,14 +146,27 @@ const Header = (props) => {
               paper: classes.drawerPaper,
             }}
           >
-            <div className={classes.drawerHeader} style={{
-          backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
-        }} >
-              <IconButton onClick={handleDrawerClose} style={{
-          backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
-        }}>
-                <p  >
-                  <button onClick={handleLogeToAXSOSPage} style={{backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)", border:"white"}}>
+            <div
+              className={classes.drawerHeader}
+              style={{
+                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+              }}
+            >
+              <IconButton
+                onClick={handleDrawerClose}
+                style={{
+                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                }}
+              >
+                <p>
+                  <button
+                    onClick={handleLogeToAXSOSPage}
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, #2c3e50,#3498db)",
+                      border: "white",
+                    }}
+                  >
                     <img
                       width="200px"
                       src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
@@ -212,12 +220,12 @@ const Header = (props) => {
           <HomeIcon onClick={homeIcon} />
 
           <MenuItem>
-            <IconButton aria-label="show 11 new notifications" color="inherit">
-              <Badge
-                onClick={notificationIcon}
-                badgeContent={11}
-                color="secondary"
-              >
+            <IconButton
+              aria-label="show 11 new notifications"
+              color="inherit"
+              onClick={notificationIcon}
+            >
+              <Badge badgeContent={11} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
