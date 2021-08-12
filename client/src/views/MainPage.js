@@ -7,28 +7,52 @@ import Post from "../components/PostComponent/Post";
 const MainPage = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/post")
-      .then((res) => {
-        setPosts(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  return (
-    <div>
-      <Header pageTitle="Axsos" />
-      <div style={{margin:"0 auto", width:"fit-content"}}>
-        <CreatePost label="what are you struggling with?"></CreatePost>
-        {/* {posts.map((post , i) =>{
+ 
+
+    useEffect(() => {
+     axios.get("http://localhost:8000/api/post")
+     .then(res => {
+         console.log(res.data);
+         setPosts(res.data);
+
+        //  setComments(res.data.comments);
+     })
+     .catch(err => console.log(err))
+
+    }, [])
+
+
+    const  createNewPost = (newPost) =>{
+        const newPost1 = {
+            postContent: newPost.content,
+            user : newPost.user
+        }
+   axios.post("http://localhost:8000/api/post", newPost1 )
+   //spread!!!!!
+   .then(res => setPosts([...posts , res.data]))
+
+    }
+
+
+
+
+    return (
+        <div>
             
-             <Post content={post.postContent} user={post.user}/> 
-        } )} */}
-        <Post content="Struggling with react " user="lanaTheodory" />
-      </div>
-    </div>
-  );
-};
+             <Header pageTitle="Axsos" /> 
+             <div style={{margin:"0 auto", width:"fit-content"}}>
+            <CreatePost  createContent={ createNewPost} label="what are you struggling with?"></CreatePost>
+
+                   <div style={{margin:"0 auto", width:"fit-content"}}>{posts.length > 0 ? posts.map((post , i) =>{
+                
+            return( <div><Post  style={{margin:"50px"}} likes={post.likes} comments={post.comments} postId={post._id} content={post.postContent} user={post.user.name} createdAt={post.createdAt}/> 
+     </div>)
+     } ) : <p>loading......</p>} 
+     </div>
+  
+          </div>
+        </div>
+    )
+}
 
 export default MainPage;

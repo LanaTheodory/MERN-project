@@ -9,14 +9,20 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
+import Cookies from 'js-cookie'
 
-const CreatePost = ({ label }) => {
-  const [postContent, setPostContent] = useState("");
+
+const CreatePost = ({ label ,  createContent}) => {
+  const [content, setContent] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8000/api/post", postContent )
-    .then(res => console.log(res))
+    const user =  Cookies.get("userId");
+    
+
+    createContent({content, user});
+    setContent("");
+
   };
   return (
     <div>
@@ -26,7 +32,8 @@ const CreatePost = ({ label }) => {
           <TextField
             style={{ width: "300px" }}
             label={label}
-            onChange={(e) => setPostContent(e.target.value)}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           />
           <Button type="submit">
             <PostAddIcon></PostAddIcon>

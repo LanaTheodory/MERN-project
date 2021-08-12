@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { navigate } from '@reach/router';
 
+
 const Register = (props) => {
     const { onSubmitProp } = props;
     const [errors, setErrors] = useState([]);
@@ -22,7 +23,7 @@ const Register = (props) => {
             confirmPassword: passwordConfirmation
         }]
         axios.post('http://localhost:8000/api/register', thisUser)
-            .then(res => navigate("/"))
+            .then(res => navigate("/register"))
             .catch(err => {
                 const errorRes = err.response.data.errors;
                 const errorArr = [];

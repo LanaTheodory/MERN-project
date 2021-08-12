@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {navigate} from '@reach/router';
-
+import Cookies from 'js-cookie';
 import './style.scss';
 const Login = (props) => {
     const [email, setEmail] = useState("");
@@ -9,7 +9,13 @@ const Login = (props) => {
 
     const loginUser = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/login', { email, password }).then(()=>navigate('/')).catch(console.error)
+        axios.post('http://localhost:8000/api/login', { email, password })
+        .then((res)=>{
+         //console.log('userId' , res.data.user._id)
+        Cookies.set('userId' , res.data.user._id)
+       navigate('/')
+    })
+        .catch(console.error)
     }
 
     return (

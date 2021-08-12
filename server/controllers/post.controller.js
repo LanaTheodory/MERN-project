@@ -18,6 +18,7 @@ module.exports.createPost = (request, response) => {
 
 module.exports.getAllPosts = (request,response) => {
     Post.find({})
+    Post.find({}).populate("user").populate("comments").populate("likes")
     .then(Posts => response.json(Posts))
     .catch(err => response.json(err))
 
