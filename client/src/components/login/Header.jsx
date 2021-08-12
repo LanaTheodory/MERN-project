@@ -23,7 +23,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
-import axios from 'axios';
+import axios from "axios";
+import Cookies from "js-cookie";
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState(Cookies.get("username"));
   const classes = useStyles();
 
   const homeIcon = (e) => {
@@ -101,9 +104,10 @@ const Header = (props) => {
   };
   const logout = (e) => {
     e.preventDefault();
-    axios.get('http://localhost:8000/api/logout')
-      .then(res => navigate("/register"))
-      .catch(err => console.log(err))
+    axios
+      .get("http://localhost:8000/api/logout")
+      .then((res) => navigate("/register"))
+      .catch((err) => console.log(err));
   };
   const notificationIcon = (e) => {
     e.preventDefault();
@@ -161,8 +165,9 @@ const Header = (props) => {
                 }}
               >
                 <p>
-                  <button
-                    onClick={handleLogeToAXSOSPage}
+                  <a
+                    href="https://academy.axsos.ps/"
+                    target="_blank"
                     style={{
                       backgroundImage:
                         "linear-gradient(to right, #2c3e50,#3498db)",
@@ -173,7 +178,7 @@ const Header = (props) => {
                       width="200px"
                       src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
                     />
-                  </button>
+                  </a>
                 </p>
 
                 {theme.direction === "ltr" ? (
@@ -189,6 +194,14 @@ const Header = (props) => {
                 backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
               }}
             >
+              {/* // User Name in the side bar */}
+              <ListItem button key={username}>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary={username} />
+              </ListItem>
+
               {["Inbox", "Starred", "Send email", "Drafts"].map(
                 (text, index) => (
                   <ListItem button key={text}>

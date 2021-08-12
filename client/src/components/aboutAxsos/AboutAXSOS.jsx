@@ -13,7 +13,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
 import ImagesSlider from "./ImagesSlider";
 import HomeIcon from "@material-ui/icons/Home";
-import {Link} from '@reach/router'
+import { Link } from "@reach/router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,7 +65,7 @@ ScrollTop.propTypes = {
 
 export default function BackToTop(props) {
   return (
-    <React.Fragment>
+    <div>
       <CssBaseline />
       <AppBar>
         <Toolbar
@@ -86,17 +86,19 @@ export default function BackToTop(props) {
         <Box my={2} style={{ marginTop: "90px", display: "block" }}>
           <ImagesSlider style={{ display: "block" }} />
           <br />
-          {[...new Array(12)]
-            .map(
-              () =>
-                `AXSOS Academy is a coding Academy in Palestine that aims to graduate thousands of skilled Software engineers
+          <p style={{ padding: "2em", lineHeight: "2em", fontSize: "20px" }}>
+            {[...new Array(2)]
+              .map(
+                () =>
+                  `AXSOS Academy is a coding Academy in Palestine that aims to graduate thousands of skilled Software engineers
                  in Palestine. We offer our students world-class training, from experienced local and international instructors.
                   AXSOS Academy ensures that each student that goes through our training, is not only technically equipped but 
                   also has all the soft skills needed to work in a high-demanding work environment, by imitating real work stimuli.
                    We aim to place each of our graduates in the IT market, either locally or globally, through the network of companies AXSOS Academy has. As part of the government’s program for economic recovery, after the Corona crisis, and as part of the 2020 projects (the year of Palestinian youth), the government launched the “Youth Coding” program, which is the first of it’s kind.
                    The program will be executed by AXSOS AG company as “AXSOS Academy” with a partnership with Coding DOJO.`
-            )
-            .join("\n")}
+              )
+              .join("\n")}
+          </p>
         </Box>
       </Container>
       <ScrollTop {...props}>
@@ -104,6 +106,6 @@ export default function BackToTop(props) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-    </React.Fragment>
+    </div>
   );
 }
