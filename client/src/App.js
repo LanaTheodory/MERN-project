@@ -10,6 +10,7 @@ import ImagesSlider from "./components/aboutAxsos/ImagesSlider";
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
      {/* <Router>
       <Registeration path="/register" />
       <Header path="/" pageTitle="Axsos" />
@@ -18,6 +19,19 @@ function App() {
      {/* <ImagesSlider/> */}
      <AboutAXSOS/>
      {/* <Header/> */}
+=======
+      {/* <Registeration /> */}
+   
+     
+
+     <Router>
+      <Registeration path="/register" />
+      <Header path="/" pageTitle="Axsos" />
+       <MainPage path="/"></MainPage>
+     </Router>
+     <Header/>
+   
+>>>>>>> 897121d064c9589ccc4e51e6956b544a2f218c35
     </div>
   );
 }
