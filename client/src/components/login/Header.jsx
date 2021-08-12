@@ -23,7 +23,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
-
+import axios from 'axios';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,7 +101,9 @@ const Header = (props) => {
   };
   const logout = (e) => {
     e.preventDefault();
-    navigate("/logout");
+    axios.get('http://localhost:8000/api/logout')
+      .then(res => navigate("/register"))
+      .catch(err => console.log(err))
   };
   const notificationIcon = (e) => {
     e.preventDefault();

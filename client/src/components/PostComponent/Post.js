@@ -47,17 +47,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [changed, setChanged] = useState(false);
-  const [comment, setComment] = useState({});
-  // const [comment, setComment] = useState([])
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:8000/api/comment")
-  //   .then(res => {setComment(res.data) ;
-  //      console.log(res.data)
-  //  })
-  //   .catch(err => console.log(err))
-
-  //  }, [changed])
+  const [comment, setComment] = useState([]);
 
   const createNewComment = (newComment) => {
     const newComment1 = {
@@ -157,6 +147,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
                     <div>
                       <Comment
                         key={i}
+                        user={com.user.name}
                         content={com.commentContent}
                         createdAt={com.createdAt}
                       ></Comment>
