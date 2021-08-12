@@ -20,8 +20,8 @@ const CreatePost = ({ label }) => {
   };
   return (
     <div>
-      {/* <Card style={{ width: "400px", height: "70px" }}> */}
-        <form style={{margin:"50px"}} inline={true} onSubmit={submitHandler}>
+      {/* <Card style={{margin:"50px"}} style={{ width: "400px", height: "70px" }}> */}
+        <form style={{margin:"50px" }} style={{ width: "400px", height: "70px" }} inline={true} onSubmit={submitHandler} >
           {/* <Input /> */}
           <TextField
             style={{ width: "300px" }}

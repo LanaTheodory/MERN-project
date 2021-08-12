@@ -53,6 +53,7 @@ const Post = ({content , user}) => {
       setExpanded(!expanded);
     };
     return (
+      <>
         <div>
            <Card className={classes.root}>
       <CardHeader
@@ -112,6 +113,7 @@ const Post = ({content , user}) => {
       </Collapse>
     </Card>
         </div>
+        </>
     )
 }
 
