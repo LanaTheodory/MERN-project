@@ -13,7 +13,7 @@ require('./routes/post.routes')(app);
 require('./routes/comment.routes')(app);
 require('./routes/like.routes')(app);
 require('./routes/notification.routes')(app);
-
+require('./routes/room.routes')(app);
 app.listen(8000, () => {
     console.log("Listening at Port 8000")
 })

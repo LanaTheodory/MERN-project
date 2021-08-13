@@ -95,27 +95,18 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
         <Card className={classes.root}>
           <CardHeader
             avatar={
-              //   <Avatar aria-label="recipe" className={classes.avatar}>
-              //   </Avatar>
+             
               <img
                 src="	https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                 height="50px"
                 width="50px"
               ></img>
             }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
+    
             title={user}
             subheader={createdAt}
           />
-          {/* <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      /> */}
+      
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
               {content}
