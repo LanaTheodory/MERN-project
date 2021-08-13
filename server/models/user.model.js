@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema({
             "Password must be 8 characters or longer"
         ] 
     },
+    rooms: [{type: Schema.Types.ObjectId, ref:"Room"}],
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
     likes: [{ type: Schema.Types.ObjectId, ref: "Like" }],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -20,10 +20,14 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import CommentIcon from "@material-ui/icons/Comment";
+
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
 import axios from 'axios';
+import Cookies from "js-cookie";
+import { Collapse } from "@material-ui/core";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,12 +97,32 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [roomName, setRoomName] = useState("");
   const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/rooms')
+      .then(res => setRooms(res.data))
+      .catch(err => console.log(err))
+  }, [])
 
   const homeIcon = (e) => {
     e.preventDefault();
     navigate("/");
   };
+
+  const createRoom = (e) => {
+    e.preventDefault();
+    const newRoom = {
+      user : Cookies.get("userId"),
+      roomName : roomName
+    }
+    axios.post('http://localhost:8000/api/room', newRoom)
+      .then(res => res.data)
+      .catch(err => console.log(err))
+  }
   const logout = (e) => {
     e.preventDefault();
     axios.get('http://localhost:8000/api/logout')
@@ -119,6 +143,10 @@ const Header = (props) => {
   };
   const handleLogeToAXSOSPage = () => {
     window.open("https://academy.axsos.ps/");
+  };
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
 
   return (
@@ -189,17 +217,35 @@ const Header = (props) => {
                 backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
               }}
             >
-              {["Inbox", "Starred", "Send email", "Drafts"].map(
-                (text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                )
-              )}
-            </List>
+              <div>
+                <p>create a new room</p>
+                <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded,
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              {/* <ExpandMoreIcon /> */}
+              <CommentIcon />
+            </IconButton>
+               <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <form onSubmit={createRoom}>
+                    <label htmlFor="roomName">Room Name:</label><br/>
+                    <input type="text" onChange={(e) => setRoomName(e.target.value)} />
+                    <button type="submit" >Submit</button>
+                  </form>
+                </Collapse>
+              </div>
+             {rooms.map((room,idx)=> {
+               return (
+                 <ul>
+                  <Link to={`/${room._id}`}><li key={idx}>{room.roomName}</li></Link>
+                 </ul>
+               )
+             })}
+             </List>
             <Divider />
             <List
               style={{
