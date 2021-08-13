@@ -6,6 +6,7 @@ import "./style.scss";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginerror, setLoginerror] = useState([])
 
   const loginUser = (e) => {
     e.preventDefault();
@@ -15,11 +16,13 @@ const Login = (props) => {
         //console.log('userId' , res.data.user._id)
         Cookies.set("userId", res.data.user._id);
         Cookies.set("username", res.data.user.name);
-        navigate("/");
+        navigate("/home");
       })
-      .catch(console.error);
-  };
-
+      .catch(err=>{ setLoginerror("wrong email or password");
+  });
+  
+   
+  }
   return (
     <div className="base-container">
       <div className="Login">
@@ -49,11 +52,13 @@ const Login = (props) => {
             <button type="submit" className="btn">
               Login
             </button>
+            <p>{loginerror}</p>
           </div>
         </form>
       </div>
     </div>
   );
 };
+
 
 export default Login;

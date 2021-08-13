@@ -11,6 +11,7 @@ const Register = (props) => {
     const [badgeNumber, setBadgeNumber] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [registerMessage, setRegisterMessage] = useState("")
 
 
     const createUser = (e) => {
@@ -23,7 +24,9 @@ const Register = (props) => {
             confirmPassword: passwordConfirmation
         }]
         axios.post('http://localhost:8000/api/register', thisUser)
-            .then(res => navigate("/register"))
+            .then(res =>{ navigate("/")
+            setRegisterMessage("please login with your new email and password ")}
+            )
             .catch(err => {
                 const errorRes = err.response.data.errors;
                 const errorArr = [];
@@ -66,6 +69,7 @@ const Register = (props) => {
                         <button type="submit" onClick={createUser} className="btn">
                             Register
                         </button>
+                        <h3>{registerMessage}</h3>
                     </div>
                 </form>
             </div>

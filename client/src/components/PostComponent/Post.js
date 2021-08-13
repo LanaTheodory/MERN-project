@@ -46,8 +46,14 @@ const useStyles = makeStyles((theme) => ({
 const Post = ({ postId, content, comments, likes, user, createdAt }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [changed, setChanged] = useState(false);
   const [comment, setComment] = useState([]);
+
+  useEffect(() => {
+ axios.get("http://localhost:8000/api/comment")
+ .then(res => setComment(res.data))
+  }, [])
+
+
 
   const createNewComment = (newComment) => {
     const newComment1 = {
@@ -56,23 +62,21 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
       post: postId,
     };
 
-    axios.post("http://localhost:8000/api/comment", newComment1).then((res) => {
-      setComment(res.data);
+    axios.post("http://localhost:8000/api/comment", newComment1)
+    .then((res) => {
+      setComment([...comment , res.data]);
       const updatePost = {
         comments: [...comments, res.data._id],
       };
       axios
         .put("http://localhost:8000/api/post/" + postId, updatePost)
         .then((res) => {
-          console.log(res.data);
-          console.log("1111111111111111111111111111");
-
           const updateUser = {
-            comments: res.data._id,
+            comments: [...comments ,res.data._id],
           };
           axios
             .put(
-              "http://localhost:8000/api/user/" + newComment.user,
+              "http://localhost:8000/api/user/" + updateUser,
               updateUser
             )
             .then((res) => console.log(res.data));
@@ -80,7 +84,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
     });
   };
 
-  const commentsArr = [comments];
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };

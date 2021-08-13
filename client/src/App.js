@@ -12,8 +12,8 @@ function App() {
   return (
     //   {/* <Header/> */}
       <Router>
-       <Registeration path="/register" />
-        <MainPage path="/" />
+       <Registeration path="/" />
+        <MainPage path="/home" />
         <AboutAXSOS path="/about"/>
       </Router>
       

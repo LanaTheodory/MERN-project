@@ -9,6 +9,11 @@ module.exports.createComment = (request, response) => {
     user,
     post,
   })
+
+  // .then(async function(Comment){
+  //   const comment=await Comment.populate('user').execPopulate();
+  //   return response.json(comment);
+  // })
     .then((Comment) => response.json(Comment))
     .catch((err) => response.status(400).json(err));
 };

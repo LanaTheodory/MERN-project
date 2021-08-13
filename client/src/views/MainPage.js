@@ -29,6 +29,7 @@ const MainPage = () => {
       postContent: newPost.content,
     };
     axios.post("http://localhost:8000/api/post", newPost1).then((res) => {
+      
       setPosts([...posts, res.data]);
       console.log(newPost);
     });

@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
         required: [
             true,
             "Name is required"
-        ] 
+        ] ,
+        unique : true,
     },
     profilePicture: { 
         type: String 

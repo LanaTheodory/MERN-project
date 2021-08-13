@@ -10,9 +10,9 @@ module.exports.createPost = (request, response) => {
     postContent,
     user,
   })
-    .then((Post) => {
-      console.log(Post);
-      return response.json(Post);
+    .then(async function(Post){
+      const post=await Post.populate('user').execPopulate();
+      return response.json(post);
     })
     .catch((err) => {
       console.log(err);
