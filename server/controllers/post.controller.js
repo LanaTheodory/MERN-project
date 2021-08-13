@@ -25,7 +25,11 @@ module.exports.createPost = (request, response) => {
 module.exports.getAllPosts = (request, response) => {
   Post.find({})
     .populate("user")
-    .populate("comments")
+    .populate({
+      path: "comments",
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { path: "user" },
+    })
     .populate("likes")
     .then((Posts) => response.json(Posts))
     .catch((err) => response.json(err));
@@ -36,6 +40,7 @@ module.exports.getOnePost = (request, response) => {
   Post.findOne({ _id: request.params.id })
     .then((Post) => response.json(Post))
     .populate("user")
+    .populate("comments")
     .catch((err) => response.json(err));
 };
 
