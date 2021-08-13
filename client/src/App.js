@@ -4,6 +4,7 @@ import Registeration from "./views/Registeration";
 // import PostComment from './components/PostComponent/Post';
 import { Router } from "@reach/router";
 import MainPage from "./views/MainPage";
+import AboutAXSOS from './components/aboutAxsos/AboutAXSOS'
 
 // import { Slider } from "@material-ui/core";
 
@@ -13,7 +14,9 @@ function App() {
       <Router>
        <Registeration path="/register" />
         <MainPage path="/" />
+        <AboutAXSOS path="/about"/>
       </Router>
+      
   );
 }
 

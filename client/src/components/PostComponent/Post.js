@@ -138,7 +138,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
                     <div>
                       <Comment
                         key={i}
-                        user={com.user.name}
+                        user={com.user}
                         content={com.commentContent}
                         createdAt={com.createdAt}
                       ></Comment>
