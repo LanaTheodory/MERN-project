@@ -22,15 +22,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CommentIcon from "@material-ui/icons/Comment";
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
 import axios from "axios";
 import Cookies from "js-cookie";
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
 import LabelIcon from "@material-ui/icons/Label";
-// import PhoneIcon from "@material-ui/icons/Phone";
+
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import Tooltip from "@material-ui/core/Tooltip";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
