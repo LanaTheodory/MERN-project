@@ -14,13 +14,16 @@ require('./routes/comment.routes')(app);
 require('./routes/like.routes')(app);
 require('./routes/notification.routes')(app);
 require('./routes/room.routes')(app);
+// app.listen(8000, () => {
+//     console.log("Listening at Port 8000")
+// })
 
 const server = app.listen(8000, () =>
-  console.log('The server is all fired up on port 8000')
+console.log('The server is all fired up on port 8000')
 );
 
-const io = require('socket.io')(server, { cors: true });
 
+const io = require('socket.io')(server, { cors: true });
 io.on("connection", socket => {
   console.log("Made socket connection");
 
