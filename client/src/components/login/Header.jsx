@@ -245,7 +245,6 @@ const Header = (props) => {
                return (
                  <ul>
                    <button onClick={e => navigate(`/${room._id}`)}><li key={idx}>{room.roomName}</li></button>
-                  // <Link to={`/${room._id}`}><li key={idx}>{room.roomName}</li></Link>
                  </ul>
                )
              })}
