@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
             true,
             "Name is required"
         ] ,
-        unique : true,
+     
     },
     profilePicture: { 
         type: String 
@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
      },
     email: { 
         type: String ,
+
         required: [
             true,
             "Email is required"
@@ -32,7 +33,8 @@ const userSchema = new mongoose.Schema({
         validate: {
             validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
             message: "Please enter a valid email"
-        }
+        },
+       
     },
     status: {
       type: Boolean,

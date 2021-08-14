@@ -31,7 +31,13 @@ module.exports.getAllPosts = (request, response) => {
       // Get friends of friends - populate the 'friends' array for every friend
       populate: { path: "user" },
     })
-    .populate("likes")
+    .populate({
+      path: "likes",
+      // Get friends of friends - populate the 'friends' array for every friend
+      populate: { path: "post_id" },
+    })
+
+    // .populate("likes")
     .then((Posts) => response.json(Posts))
     .catch((err) => response.json(err));
 };

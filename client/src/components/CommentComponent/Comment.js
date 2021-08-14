@@ -31,6 +31,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Comment = ({ content, user, createdAt }) => {
   const classes = useStyles();
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 
   return (
     <div>
@@ -44,10 +56,10 @@ const Comment = ({ content, user, createdAt }) => {
             ></img>
           }
           title={user.name}
-          subheader={createdAt}
+          subheader={formatDate(createdAt)}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="h6" color="textSecondary" component="p">
             {content}
           </Typography>
         </CardContent>

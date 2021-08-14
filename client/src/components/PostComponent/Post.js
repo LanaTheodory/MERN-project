@@ -3,22 +3,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CommentIcon from "@material-ui/icons/Comment";
 import Comment from "../CommentComponent/Comment";
 import CreatePost from "./CreatePost";
 import axios from "axios";
+import Cookies from "js-cookie";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,14 +43,16 @@ const useStyles = makeStyles((theme) => ({
 const Post = ({ postId, content, comments, likes, user, createdAt }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [comment, setComment] = useState([]);
+  const [comment, setComment] = useState(comments);
+  const [liikes, setLiikes] = useState(likes);
+  //const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
- axios.get("http://localhost:8000/api/comment")
- .then(res => setComment(res.data))
-  }, [])
-
-
+    // axios.get("http://localhost:8000/api/comment").then((res) => {
+    //   setComment(res.data);
+    //setLoaded(true);
+    // });
+  }, []);
 
   const createNewComment = (newComment) => {
     const newComment1 = {
@@ -62,28 +61,60 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
       post: postId,
     };
 
-    axios.post("http://localhost:8000/api/comment", newComment1)
-    .then((res) => {
-      setComment([...comment , res.data]);
+    axios.post("http://localhost:8000/api/comment", newComment1).then((res) => {
+      setComment([...comment, res.data]);
       const updatePost = {
-        comments: [...comments, res.data._id],
+        comments: [...comment, res.data._id],
       };
       axios
         .put("http://localhost:8000/api/post/" + postId, updatePost)
         .then((res) => {
           const updateUser = {
-            comments: [...comments ,res.data._id],
+            comments: [...comment, res.data._id],
           };
           axios
-            .put(
-              "http://localhost:8000/api/user/" + updateUser,
-              updateUser
-            )
+            .put("http://localhost:8000/api/user/" + updateUser, updateUser)
             .then((res) => console.log(res.data));
         });
     });
   };
 
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+  // const handelLikeClick = () =>{
+  //   const newLike={
+  //     user_id : Cookies.get("userId"),
+  //     post_id : postId
+  //   }
+
+  //   addLike(newLike)
+  // }
+
+  const addLike = () => {
+    const newLike = {
+      user_id: Cookies.get("userId"),
+      post_id: postId,
+    };
+    axios.post("http://localhost:8000/api/like", newLike).then((res) => {
+      setLiikes([...liikes, res.data]);
+      const updatePost1 = {
+        likes: [...likes, res.data],
+      };
+      axios.put("http://localhost:8000/api/post/" + postId, updatePost1);
+
+      //  .then(res=> lastUpdatedPost(res.data))
+    });
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -91,32 +122,39 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
 
   return (
     <>
+      {/* {loaded && ( */}
       <div>
         <Card className={classes.root}>
+          {console.log("2")}
           <CardHeader
             avatar={
-             
               <img
                 src="	https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                 height="50px"
                 width="50px"
               ></img>
             }
-    
             title={user}
-            subheader={createdAt}
+            subheader={formatDate(createdAt)}
           />
-      
+
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="h4" color="textSecondary" component="p">
               {content}
             </Typography>
           </CardContent>
 
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
+            {liikes.length < 1 ? (
+              <IconButton onClick={addLike} aria-label="add to favorites">
+               <FavoriteBorderIcon/> 
+              </IconButton>
+            ) : (
+              <IconButton onClick={addLike} aria-label="add to favorites">
+                <FavoriteIcon /> <h6>{liikes.length}</h6>
+              </IconButton>
+            )}
+
             {/* <IconButton aria-label="share">
           <ShareIcon />
         </IconButton> */}
@@ -136,8 +174,8 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
             <CardContent>
               <Typography paragraph>comments:</Typography>
               {/* map user comments here! */}
-              {comments.length > 0 ? (
-                comments.map((com, i) => {
+              {comment.length > 0 ? (
+                comment.map((com, i) => {
                   return (
                     <div>
                       <Comment
@@ -161,6 +199,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
           </Collapse>
         </Card>
       </div>
+      {/* )} */}
     </>
   );
 };
