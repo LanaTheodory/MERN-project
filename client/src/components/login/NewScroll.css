@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-size: smaller;
+  font-family: sans-serif;
+  color: black;
+}
+
+.orb {
+  width: 200px;
+  height: 100px;
+}
+
+.orb:hover {
+  transform: scale(1.2);
+  opacity: 0.5;
+  cursor: pointer;
+}
+.news {
+  color: #6d0909;
+}
+.desc {
+  color: black;
+}
+
+.red {
+  background: red;
+}
+.yellow {
+  background: yellow;
+}
+.blue {
+  background: blue;
+}
+.orange {
+  background: orange;
+}
+.purple {
+  background: purple;
+}
+.green {
+  background: green;
+}
+
+.marquee {
+  height: 600px;
+  width: 250px;
+  margin-left: 80px;
+  border: 2px solid rgb(120, 0, 0);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: absolute;
+  margin: 200px auto;
+}
+
+.marquee--inner {
+  display: block;
+  width: 200%;
+  margin: 70px 0;
+  position: absolute;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee--inner:hover {
+  animation-play-state: paused;
+}
+
+.half {
+  float: left;
+  width: 10%;
+}
+
+span {
+  float: left;
+  width: 50%;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.bignews {
+  text-emphasis: 20px;
+  color: black;
+}

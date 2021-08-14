@@ -37,6 +37,7 @@ import FastfoodIcon from "@material-ui/icons/Fastfood";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import InfoIcon from "@material-ui/icons/Info";
 import { Collapse } from "@material-ui/core";
+import BackGroundHomePage from "./BackGroundHomePage";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -178,142 +179,149 @@ const Header = (props) => {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        position="static"
-        style={{
-          backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper,
+    <>
+      <div className={classes.root}>
+        <AppBar
+          position="static"
+          style={{
+            backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+          }}
+        >
+          <Toolbar
+            style={{
+              color: "black",
+              backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
             }}
           >
-            <div
-              className={classes.drawerHeader}
-              style={{
-                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              className={classes.drawer}
+              variant="persistent"
+              anchor="left"
+              open={open}
+              classes={{
+                paper: classes.drawerPaper,
               }}
             >
-              <IconButton
-                onClick={handleDrawerClose}
+              <div
+                className={classes.drawerHeader}
                 style={{
                   backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
                 }}
               >
-                <p>
-                  <a
-                    href="https://academy.axsos.ps/"
-                    target="_blank"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(to right, #2c3e50,#3498db)",
-                      border: "white",
-                    }}
-                  >
-                    <img
-                      width="200px"
-                      src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
-                    />
-                  </a>
-                </p>
-
-                {theme.direction === "ltr" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </div>
-            <Divider />
-            <List
-              style={{
-                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
-              }}
-            >
-              {/* // User Name in the side bar */}
-              <ListItem button key={username}>
-                <ListItemIcon>
-                  <Tooltip title="Visit your GitHub" arrow>
+                <IconButton
+                  onClick={handleDrawerClose}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right, #2c3e50,#3498db)",
+                  }}
+                >
+                  <p>
                     <a
-                      href="https://github.com/"
+                      href="https://academy.axsos.ps/"
                       target="_blank"
-                      style={{ color: "black" }}
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right, #2c3e50,#3498db)",
+                        border: "white",
+                      }}
                     >
-                      {" "}
-                      <PersonIcon />
+                      <img
+                        width="200px"
+                        src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
+                      />
                     </a>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText primary={username} />
-              </ListItem>
-              {/* // Email in the side bar */}
-              <ListItem button key={email}>
-                <ListItemIcon>
-                  <Tooltip title="Visit your Gmail" arrow>
-                    <a
-                      href="https://www.gmail.com/"
-                      target="_blank"
-                      style={{ color: "black" }}
-                    >
-                      {" "}
-                      <EmailIcon />
-                    </a>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText primary={email} />
-              </ListItem>
+                  </p>
 
-              {/* // badgeNumber in the side bar */}
-              <ListItem button key={badgeNumber}>
-                <ListItemIcon>
-                  <Tooltip title="Visit Coding-Dojo" arrow>
-                    <a
-                      href="https://learn.codingdojo.com/"
-                      target="_blank"
-                      style={{ color: "black" }}
-                    >
-                      {" "}
-                      <LabelIcon />
-                    </a>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText primary={badgeNumber} />
-              </ListItem>
+                  {theme.direction === "ltr" ? (
+                    <ChevronLeftIcon />
+                  ) : (
+                    <ChevronRightIcon />
+                  )}
+                </IconButton>
+              </div>
+              <Divider />
+              <List
+                style={{
+                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                }}
+              >
+                {/* // User Name in the side bar */}
+                <ListItem button key={username}>
+                  <ListItemIcon>
+                    <Tooltip title="Visit your GitHub" arrow>
+                      <a
+                        href="https://github.com/"
+                        target="_blank"
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        <PersonIcon />
+                      </a>
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={username} />
+                </ListItem>
+                {/* // Email in the side bar */}
+                <ListItem button key={email}>
+                  <ListItemIcon>
+                    <Tooltip title="Visit your Gmail" arrow>
+                      <a
+                        href="https://www.gmail.com/"
+                        target="_blank"
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        <EmailIcon />
+                      </a>
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={email} />
+                </ListItem>
 
-              {/* // phoneNumber in the side bar */}
-              <ListItem button key={phoneNumber}>
-                <ListItemIcon>
-                  <Tooltip title="Visit your WhatsApp web" arrow>
-                    <a
-                      href="https://web.whatsapp.com/"
-                      target="_blank"
-                      style={{ color: "black" }}
-                    >
-                      {" "}
-                      <WhatsAppIcon />
-                    </a>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText primary={phoneNumber} />
-              </ListItem>
+                {/* // badgeNumber in the side bar */}
+                <ListItem button key={badgeNumber}>
+                  <ListItemIcon>
+                    <Tooltip title="Visit Coding-Dojo" arrow>
+                      <a
+                        href="https://learn.codingdojo.com/"
+                        target="_blank"
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        <LabelIcon />
+                      </a>
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={badgeNumber} />
+                </ListItem>
 
-              {/* {["Inbox", "Starred", "Send email", "Drafts"].map(
+                {/* // phoneNumber in the side bar */}
+                <ListItem button key={phoneNumber}>
+                  <ListItemIcon>
+                    <Tooltip title="Visit your WhatsApp web" arrow>
+                      <a
+                        href="https://web.whatsapp.com/"
+                        target="_blank"
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        <WhatsAppIcon />
+                      </a>
+                    </Tooltip>
+                  </ListItemIcon>
+                  <ListItemText primary={phoneNumber} />
+                </ListItem>
+
+                {/* {["Inbox", "Starred", "Send email", "Drafts"].map(
                 (text, index) => (
                   <ListItem button key={text}>
                     <ListItemIcon>
@@ -323,107 +331,133 @@ const Header = (props) => {
                   </ListItem>
                 )
               )} */}
-            </List>
-
-            <div>
-              <p>create a new room</p>
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
-                })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
+              </List>
+              {/* create roooooooms */}
+              <div
+                style={{
+                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                }}
               >
-                {/* <ExpandMoreIcon /> */}
-                <CommentIcon />
-              </IconButton>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <form onSubmit={createRoom}>
-                  <label htmlFor="roomName">Room Name:</label>
-                  <br />
-                  <input
-                    type="text"
-                    onChange={(e) => setRoomName(e.target.value)}
-                  />
-                  <button type="submit">Submit</button>
-                </form>
-              </Collapse>
-            </div>
-            {rooms.map((room, idx) => {
-              return (
-                <ul>
-                  <Link to={`/${room._id}`}>
-                    <li key={idx}>{room.roomName}</li>
-                  </Link>
-                </ul>
-              );
-            })}
-            {/* </List> */}
-            <div>
-              <p>create a new room</p>
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
-                })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                {/* <ExpandMoreIcon /> */}
-                <CommentIcon />
-              </IconButton>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <form onSubmit={createRoom}>
-                  <label htmlFor="roomName">Room Name:</label>
-                  <br />
-                  <input
-                    type="text"
-                    onChange={(e) => setRoomName(e.target.value)}
-                  />
-                  <button type="submit">Submit</button>
-                </form>
-              </Collapse>
-            </div>
-            {rooms.map((room, idx) => {
-              return (
-                <ul>
-                  <button onClick={(e) => navigate(`/${room._id}`)}>
-                    <li key={idx}>{room.roomName}</li>
-                  </button>
-                </ul>
-              );
-            })}
-            {/* </List> */}
-            <Divider />
-            <List
-              style={{
-                backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
-              }}
-            >
-              {/* //Food Page */}
-              <ListItem button>
-                <ListItemIcon>
-                  <FastfoodIcon />
-                </ListItemIcon>
-                <ListItemText onClick={foodPage} primary="Food Suggestion" />
-              </ListItem>
+                <div
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right, #2c3e50,#3498db)",
+                  }}
+                >
+                  <IconButton
+                    className={clsx(classes.expand, {
+                      [classes.expandOpen]: expanded,
+                    })}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    {/* <ExpandMoreIcon /> */}
+                    <CommentIcon
+                      primary="Create Room"
+                      style={{ color: "black" }}
+                    />
 
-              {/* //create room */}
-              <ListItem button>
-                <ListItemIcon>
-                  <GroupAddIcon />
-                </ListItemIcon>
-                <ListItemText onClick={createRoom} primary="Create Room" />
-              </ListItem>
-              {/* //About AXSOS */}
-              <ListItem button>
-                <ListItemIcon>
-                  <InfoIcon />
-                </ListItemIcon>
-                <ListItemText onClick={aboutAXSOS} primary="About AXSOS" />
-              </ListItem>
-              {/* {["All mail", "Trash", "Spam"].map((text, index) => (
+                    <ListItemText
+                      primary="Create Rooms"
+                      style={{ color: "black" }}
+                    />
+                  </IconButton>
+
+                  <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <form onSubmit={createRoom}>
+                      <label
+                        htmlFor="roomName"
+                        style={{ color: "black" }}
+                      ></label>
+                      <br />
+                      <input
+                        placeholder="Room Name"
+                        type="text"
+                        onChange={(e) => setRoomName(e.target.value)}
+                      />
+                      <button
+                        style={{
+                          color: "black",
+                          backgroundImage:
+                            "linear-gradient(to right, #2c3e50,#3498db)",
+                        }}
+                        type="submit"
+                        style={{
+                          color: "black",
+                          backgroundImage:
+                            "linear-gradient(to right, #2c3e50,#3498db)",
+                        }}
+                      >
+                        Create
+                      </button>
+                    </form>
+                  </Collapse>
+                </div>
+                {rooms.map((room, idx) => {
+                  return (
+                    <ul
+                      style={{
+                        color: "black",
+                        backgroundImage:
+                          "linear-gradient(to right, #2c3e50,#3498db)",
+                      }}
+                    >
+                      <Link
+                        to={`/${room._id}`}
+                        style={{
+                          color: "black",
+                          backgroundImage:
+                            "linear-gradient(to right, #2c3e50,#3498db)",
+                        }}
+                      >
+                        <li
+                          style={{
+                            color: "black",
+                            backgroundImage:
+                              "linear-gradient(to right, #2c3e50,#3498db)",
+                          }}
+                          key={idx}
+                        >
+                          {room.roomName}
+                        </li>
+                      </Link>
+                    </ul>
+                  );
+                })}
+              </div>
+              {/* </List> */}
+
+              {/* </List> */}
+              <Divider />
+              <List
+                style={{
+                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                }}
+              >
+                {/* //Food Page */}
+                <ListItem button>
+                  <ListItemIcon>
+                    <FastfoodIcon />
+                  </ListItemIcon>
+                  <ListItemText onClick={foodPage} primary="Food Suggestion" />
+                </ListItem>
+
+                {/* //create room */}
+                <ListItem button>
+                  <ListItemIcon>
+                    <GroupAddIcon />
+                  </ListItemIcon>
+                  <ListItemText onClick={createRoom} primary="Create Room" />
+                </ListItem>
+                {/* //About AXSOS */}
+                <ListItem button>
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <ListItemText onClick={aboutAXSOS} primary="About AXSOS" />
+                </ListItem>
+                {/* {["All mail", "Trash", "Spam"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -431,31 +465,44 @@ const Header = (props) => {
                   <ListItemText primary={text} />
                 </ListItem>
               ))} */}
-            </List>
-          </Drawer>
-          <Typography variant="h6" className={classes.title}>
-            {props.pageTitle}
-          </Typography>
-          <HomeIcon onClick={homeIcon} />
+              </List>
+            </Drawer>
+            <Typography variant="h6" className={classes.title}>
+              {props.pageTitle}
+            </Typography>
+            <HomeIcon onClick={homeIcon} />
 
-          <MenuItem>
-            <IconButton
-              aria-label="show 11 new notifications"
-              color="inherit"
-              onClick={notificationIcon}
-            >
-              <Badge badgeContent={100} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </MenuItem>
+            <MenuItem>
+              <IconButton
+                aria-label="show 11 new notifications"
+                color="inherit"
+                onClick={notificationIcon}
+              >
+                <Badge badgeContent={100} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </MenuItem>
 
-          <Button onClick={logout} color="inherit">
-            logOut
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+            <Button onClick={logout} color="inherit">
+              logOut
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+      <div style={{ width: "900px" }}>
+        <div
+          style={{
+            marginLeft: "60%",
+            marginTop: "15%",
+            justifyContent: "space-evenly",
+            display: "flex",
+          }}
+        >
+          <BackGroundHomePage />
+        </div>
+      </div>
+    </>
   );
 };
 export default Header;

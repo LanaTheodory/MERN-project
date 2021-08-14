@@ -4,7 +4,7 @@ import Registeration from "./views/Registeration";
 // import PostComment from './components/PostComponent/Post';
 import { Router } from "@reach/router";
 import MainPage from "./views/MainPage";
-import AboutAXSOS from './components/aboutAxsos/AboutAXSOS'
+import AboutAXSOS from "./components/aboutAxsos/AboutAXSOS";
 import MainMainPage from "./views/MainMainPage";
 
 // import { Slider } from "@material-ui/core";
@@ -12,13 +12,12 @@ import MainMainPage from "./views/MainMainPage";
 function App() {
   return (
     //   {/* <Header/> */}
-      <Router>
-       <Registeration path="/" />
-       <MainMainPage path="/home"/>
-        <MainPage path="/:id" />
-        <AboutAXSOS path="/about"/>
-      </Router>
-      
+    <Router>
+      <Registeration path="/" />
+      <MainMainPage path="/home" />
+      <MainPage path="/:id" />
+      <AboutAXSOS path="/about" />
+    </Router>
   );
 }
 
