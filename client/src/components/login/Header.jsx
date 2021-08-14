@@ -490,17 +490,12 @@ const Header = (props) => {
           </Toolbar>
         </AppBar>
       </div>
-      <div style={{ width: "900px" }}>
-        <div
-          style={{
-            marginLeft: "60%",
-            marginTop: "15%",
-            justifyContent: "space-evenly",
-            display: "flex",
-          }}
-        >
-          <BackGroundHomePage />
-        </div>
+      <div
+        style={{
+          backgroundImage: "linear-gradient(to right, #5fc3e4,#e55d87)",
+        }}
+      >
+        <BackGroundHomePage />
       </div>
     </>
   );
