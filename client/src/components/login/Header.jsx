@@ -27,6 +27,15 @@ import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
 import axios from "axios";
 import Cookies from "js-cookie";
+import EmailIcon from "@material-ui/icons/Email";
+import PersonIcon from "@material-ui/icons/Person";
+import LabelIcon from "@material-ui/icons/Label";
+// import PhoneIcon from "@material-ui/icons/Phone";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import Tooltip from "@material-ui/core/Tooltip";
+import FastfoodIcon from "@material-ui/icons/Fastfood";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+import InfoIcon from "@material-ui/icons/Info";
 import { Collapse } from "@material-ui/core";
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -99,6 +108,9 @@ const Header = (props) => {
   const [open, setOpen] = useState(false);
   const [roomName, setRoomName] = useState("");
   const [username, setUsername] = useState(Cookies.get("username"));
+  const [email, setEmail] = useState(Cookies.get("email"));
+  const [badgeNumber, setbadgeNumber] = useState(Cookies.get("badgeNumber"));
+  const [phoneNumber, setPhoneNumber] = useState(Cookies.get("phoneNumber"));
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [rooms, setRooms] = useState([]);
@@ -144,6 +156,18 @@ const Header = (props) => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const foodPage = (e) => {
+    e.preventDefault();
+    navigate("/food");
+  };
+  // const createRoom = (e) => {
+  //   e.preventDefault();
+  //   navigate("/room");
+  // };
+  const aboutAXSOS = (e) => {
+    e.preventDefault();
+    navigate("/about");
   };
   const handleLogeToAXSOSPage = () => {
     window.open("https://academy.axsos.ps/");
@@ -222,47 +246,183 @@ const Header = (props) => {
                 backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
               }}
             >
-              <div>
-                <p>create a new room</p>
-                <IconButton
-                  className={clsx(classes.expand, {
-                    [classes.expandOpen]: expanded,
-                  })}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                  {/* <ExpandMoreIcon /> */}
-                  <CommentIcon />
-                </IconButton>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                  <form onSubmit={createRoom}>
-                    <label htmlFor="roomName">Room Name:</label>
-                    <br />
-                    <input
-                      type="text"
-                      onChange={(e) => setRoomName(e.target.value)}
-                    />
-                    <button type="submit">Submit</button>
-                  </form>
-                </Collapse>
-              </div>
-              {rooms.map((room, idx) => {
-                return (
-                  <ul>
-                    <button onClick={(e) => navigate(`/${room._id}`)}>
-                      <li key={idx}>{room.roomName}</li>
-                    </button>
-                  </ul>
-                );
-              })}
+              {/* // User Name in the side bar */}
+              <ListItem button key={username}>
+                <ListItemIcon>
+                  <Tooltip title="Visit your GitHub" arrow>
+                    <a
+                      href="https://github.com/"
+                      target="_blank"
+                      style={{ color: "black" }}
+                    >
+                      {" "}
+                      <PersonIcon />
+                    </a>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText primary={username} />
+              </ListItem>
+              {/* // Email in the side bar */}
+              <ListItem button key={email}>
+                <ListItemIcon>
+                  <Tooltip title="Visit your Gmail" arrow>
+                    <a
+                      href="https://www.gmail.com/"
+                      target="_blank"
+                      style={{ color: "black" }}
+                    >
+                      {" "}
+                      <EmailIcon />
+                    </a>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText primary={email} />
+              </ListItem>
+
+              {/* // badgeNumber in the side bar */}
+              <ListItem button key={badgeNumber}>
+                <ListItemIcon>
+                  <Tooltip title="Visit Coding-Dojo" arrow>
+                    <a
+                      href="https://learn.codingdojo.com/"
+                      target="_blank"
+                      style={{ color: "black" }}
+                    >
+                      {" "}
+                      <LabelIcon />
+                    </a>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText primary={badgeNumber} />
+              </ListItem>
+
+              {/* // phoneNumber in the side bar */}
+              <ListItem button key={phoneNumber}>
+                <ListItemIcon>
+                  <Tooltip title="Visit your WhatsApp web" arrow>
+                    <a
+                      href="https://web.whatsapp.com/"
+                      target="_blank"
+                      style={{ color: "black" }}
+                    >
+                      {" "}
+                      <WhatsAppIcon />
+                    </a>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText primary={phoneNumber} />
+              </ListItem>
+
+              {/* {["Inbox", "Starred", "Send email", "Drafts"].map(
+                (text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                )
+              )} */}
             </List>
+
+            <div>
+              <p>create a new room</p>
+              <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                {/* <ExpandMoreIcon /> */}
+                <CommentIcon />
+              </IconButton>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <form onSubmit={createRoom}>
+                  <label htmlFor="roomName">Room Name:</label>
+                  <br />
+                  <input
+                    type="text"
+                    onChange={(e) => setRoomName(e.target.value)}
+                  />
+                  <button type="submit">Submit</button>
+                </form>
+              </Collapse>
+            </div>
+            {rooms.map((room, idx) => {
+              return (
+                <ul>
+                  <Link to={`/${room._id}`}>
+                    <li key={idx}>{room.roomName}</li>
+                  </Link>
+                </ul>
+              );
+            })}
+            {/* </List> */}
+            <div>
+              <p>create a new room</p>
+              <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                {/* <ExpandMoreIcon /> */}
+                <CommentIcon />
+              </IconButton>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <form onSubmit={createRoom}>
+                  <label htmlFor="roomName">Room Name:</label>
+                  <br />
+                  <input
+                    type="text"
+                    onChange={(e) => setRoomName(e.target.value)}
+                  />
+                  <button type="submit">Submit</button>
+                </form>
+              </Collapse>
+            </div>
+            {rooms.map((room, idx) => {
+              return (
+                <ul>
+                  <button onClick={(e) => navigate(`/${room._id}`)}>
+                    <li key={idx}>{room.roomName}</li>
+                  </button>
+                </ul>
+              );
+            })}
+            {/* </List> */}
             <Divider />
             <List
               style={{
                 backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
               }}
             >
+              {/* //Food Page */}
+              <ListItem button>
+                <ListItemIcon>
+                  <FastfoodIcon />
+                </ListItemIcon>
+                <ListItemText onClick={foodPage} primary="Food Suggestion" />
+              </ListItem>
+
+              {/* //create room */}
+              <ListItem button>
+                <ListItemIcon>
+                  <GroupAddIcon />
+                </ListItemIcon>
+                <ListItemText onClick={createRoom} primary="Create Room" />
+              </ListItem>
+              {/* //About AXSOS */}
+              <ListItem button>
+                <ListItemIcon>
+                  <InfoIcon />
+                </ListItemIcon>
+                <ListItemText onClick={aboutAXSOS} primary="About AXSOS" />
+              </ListItem>
               {/* {["All mail", "Trash", "Spam"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>
@@ -284,7 +444,7 @@ const Header = (props) => {
               color="inherit"
               onClick={notificationIcon}
             >
-              <Badge badgeContent={11} color="secondary">
+              <Badge badgeContent={100} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
