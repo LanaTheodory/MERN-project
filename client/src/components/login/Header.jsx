@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -25,7 +25,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
-import axios from 'axios';
+import axios from "axios";
 import Cookies from "js-cookie";
 import { Collapse } from "@material-ui/core";
 const drawerWidth = 240;
@@ -104,10 +104,11 @@ const Header = (props) => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/rooms')
-      .then(res => setRooms(res.data))
-      .catch(err => console.log(err))
-  }, [])
+    axios
+      .get("http://localhost:8000/api/rooms")
+      .then((res) => setRooms(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const homeIcon = (e) => {
     e.preventDefault();
@@ -117,13 +118,14 @@ const Header = (props) => {
   const createRoom = (e) => {
     e.preventDefault();
     const newRoom = {
-      user : Cookies.get("userId"),
-      roomName : roomName
-    }
-    axios.post('http://localhost:8000/api/room', newRoom)
-      .then(res => res.data)
-      .catch(err => console.log(err))
-  }
+      user: Cookies.get("userId"),
+      roomName: roomName,
+    };
+    axios
+      .post("http://localhost:8000/api/room", newRoom)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  };
   const logout = (e) => {
     e.preventDefault();
     axios
@@ -223,46 +225,52 @@ const Header = (props) => {
               <div>
                 <p>create a new room</p>
                 <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              {/* <ExpandMoreIcon /> */}
-              <CommentIcon />
-            </IconButton>
-               <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded,
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  {/* <ExpandMoreIcon /> */}
+                  <CommentIcon />
+                </IconButton>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <form onSubmit={createRoom}>
-                    <label htmlFor="roomName">Room Name:</label><br/>
-                    <input type="text" onChange={(e) => setRoomName(e.target.value)} />
-                    <button type="submit" >Submit</button>
+                    <label htmlFor="roomName">Room Name:</label>
+                    <br />
+                    <input
+                      type="text"
+                      onChange={(e) => setRoomName(e.target.value)}
+                    />
+                    <button type="submit">Submit</button>
                   </form>
                 </Collapse>
               </div>
-             {rooms.map((room,idx)=> {
-               return (
-                 <ul>
-                   <button onClick={e => navigate(`/${room._id}`)}><li key={idx}>{room.roomName}</li></button>
-                 </ul>
-               )
-             })}
-             </List>
+              {rooms.map((room, idx) => {
+                return (
+                  <ul>
+                    <button onClick={(e) => navigate(`/${room._id}`)}>
+                      <li key={idx}>{room.roomName}</li>
+                    </button>
+                  </ul>
+                );
+              })}
+            </List>
             <Divider />
             <List
               style={{
                 backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
               }}
             >
-              {["All mail", "Trash", "Spam"].map((text, index) => (
+              {/* {["All mail", "Trash", "Spam"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
-              ))}
+              ))} */}
             </List>
           </Drawer>
           <Typography variant="h6" className={classes.title}>
