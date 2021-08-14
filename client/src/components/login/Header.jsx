@@ -128,7 +128,7 @@ const Header = (props) => {
     e.preventDefault();
     axios
       .get("http://localhost:8000/api/logout")
-      .then((res) => navigate("/register"))
+      .then((res) => navigate("/"))
       .catch((err) => console.log(err));
   };
   const notificationIcon = (e) => {
