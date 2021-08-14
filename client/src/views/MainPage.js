@@ -82,7 +82,7 @@ const MainPage = (props) => {
               );
             })
           ) : (
-            <p>loading......</p>
+            <p>loading struggles...</p>
           )}
         </div>
       </div>
