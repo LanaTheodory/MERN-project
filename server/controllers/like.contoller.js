@@ -4,13 +4,18 @@ const { Like } = require('../models/like.model');
     /////// to create a Like///////////////////
 
 module.exports.createLike = (request, response) => {
-    const { user, post } = request.body;
+    const { user_id, post_id } = request.body;
     Like.create({
-        user,
-        post
+        user_id,
+        post_id
 
     })
-        .then(Like => response.json(Like))
+
+.then(async function(Like){
+    const like=await Like.populate('post_id').populate('user_id').execPopulate();
+    return response.json(like);
+  })
+    //     .then(Like => response.json(Like))
         .catch(err => response.status(400).json(err))
 }
 
