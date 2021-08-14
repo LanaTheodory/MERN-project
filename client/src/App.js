@@ -13,7 +13,7 @@ function App() {
     //   {/* <Header/> */}
       <Router>
        <Registeration path="/" />
-        <MainPage path="/home" />
+        <MainPage path="/:id" />
         <AboutAXSOS path="/about"/>
       </Router>
       

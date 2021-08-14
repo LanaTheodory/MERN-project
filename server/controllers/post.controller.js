@@ -4,11 +4,12 @@ const { Post } = require("../models/post.model");
 
 module.exports.createPost = (request, response) => {
   console.log(request.body);
-  const { postContent, user } = request.body;
+  const { postContent, user,room } = request.body;
 
   Post.create({
     postContent,
     user,
+    room
   })
     .then(async function(Post){
       const post=await Post.populate('user').execPopulate();

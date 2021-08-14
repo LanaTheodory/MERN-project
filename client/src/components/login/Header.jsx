@@ -244,7 +244,8 @@ const Header = (props) => {
              {rooms.map((room,idx)=> {
                return (
                  <ul>
-                  <Link to={`/${room._id}`}><li key={idx}>{room.roomName}</li></Link>
+                   <button onClick={e => navigate(`/${room._id}`)}><li key={idx}>{room.roomName}</li></button>
+                  // <Link to={`/${room._id}`}><li key={idx}>{room.roomName}</li></Link>
                  </ul>
                )
              })}
