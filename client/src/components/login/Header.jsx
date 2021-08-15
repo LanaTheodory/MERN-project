@@ -21,7 +21,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CommentIcon from "@material-ui/icons/Comment";
-
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Link } from "@reach/router";
 import axios from "axios";
 
@@ -113,7 +113,7 @@ const Header = (props) => {
   const [username, setUsername] = useState(Cookies.get("username"));
   const [email, setEmail] = useState(Cookies.get("email"));
   const [badgeNumber, setbadgeNumber] = useState(Cookies.get("badgeNumber"));
-  const [phoneNumber, setPhoneNumber] = useState(Cookies.get("phoneNumber"));
+  const [phoneNumber, setPhoneNumber] = useState("0598376254");
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [rooms, setRooms] = useState([]);
@@ -124,14 +124,12 @@ const Header = (props) => {
       .get("http://localhost:8000/api/rooms")
       .then((res) => setRooms(res.data))
       .catch((err) => console.log(err));
-  }, []);
-  
-  useEffect(() => {
     axios
       .get("http://localhost:8000/api/users")
       .then((res) => setUsers(res.data))
       .catch((err) => console.log(err));
-  }, []);
+
+  }, [rooms]);
 
   const homeIcon = (e) => {
     e.preventDefault();
@@ -146,7 +144,7 @@ const Header = (props) => {
     };
     axios
       .post("http://localhost:8000/api/room", newRoom)
-      .then((res) => { setRooms(res.data)})
+      .then((res) => { setRooms(...rooms , res.data)})
        
       .catch((err) => console.log(err));
   };
@@ -191,17 +189,18 @@ const Header = (props) => {
 
   return (
     <>
+
       <div className={classes.root}>
         <AppBar
           position="static"
           style={{
-            backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+            backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
           }}
         >
           <Toolbar
             style={{
-              color: "black",
-              backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+              color: "white",
+              backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
             }}
           >
             <IconButton
@@ -225,14 +224,15 @@ const Header = (props) => {
               <div
                 className={classes.drawerHeader}
                 style={{
-                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                  backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
                 }}
               >
+                
                 <IconButton
                   onClick={handleDrawerClose}
                   style={{
                     backgroundImage:
-                      "linear-gradient(to right, #2c3e50,#3498db)",
+                      "linear-gradient(to right, #ffffff, #ffffff)", width:"200px", height:"100px"
                   }}
                 >
                   <p>
@@ -241,13 +241,14 @@ const Header = (props) => {
                       target="_blank"
                       style={{
                         backgroundImage:
-                          "linear-gradient(to right, #2c3e50,#3498db)",
-                        border: "white",
+                          "linear-gradient(to right, #ffffff, #ffffff)",
+                       
                       }}
                     >
                       <img
-                        width="200px"
-                        src="https://academy.axsos.ps/wp-content/uploads/2020/04/AXSOS-Logo-SVG.svg"
+                        width="150px"
+                        height="50px"
+                        src="https://academy.axsos.ps/wp-content/uploads/2020/11/cropped-PM-Office-and-AXSOS-Academy-logo.png"
                       />
                     </a>
                   </p>
@@ -262,33 +263,36 @@ const Header = (props) => {
               <Divider />
               <List
                 style={{
-                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                  backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
                 }}
               >
                 {/* // User Name in the side bar */}
-                <ListItem button key={username}>
+                <ListItem 
+                 style={{ color: "white" }}
+                
+                button key={username}>
                   <ListItemIcon>
                     <Tooltip title="Visit your GitHub" arrow>
                       <a
                         href="https://github.com/"
                         target="_blank"
-                        style={{ color: "black" }}
+                        style={{ color: "white" }}
                       >
                         {" "}
                         <PersonIcon />
                       </a>
                     </Tooltip>
                   </ListItemIcon>
-                  <ListItemText primary={username} />
+                  <ListItemText  style={{ color: "white" }} primary={username} />
                 </ListItem>
                 {/* // Email in the side bar */}
-                <ListItem button key={email}>
+                <ListItem   style={{ color: "white" }} button key={email}>
                   <ListItemIcon>
                     <Tooltip title="Visit your Gmail" arrow>
                       <a
                         href="https://www.gmail.com/"
                         target="_blank"
-                        style={{ color: "black" }}
+                        style={{ color: "white" }}
                       >
                         {" "}
                         <EmailIcon />
@@ -299,13 +303,13 @@ const Header = (props) => {
                 </ListItem>
 
                 {/* // badgeNumber in the side bar */}
-                <ListItem button key={badgeNumber}>
+                <ListItem  style={{ color: "white" }} button key={badgeNumber}>
                   <ListItemIcon>
                     <Tooltip title="Visit Coding-Dojo" arrow>
                       <a
                         href="https://learn.codingdojo.com/"
                         target="_blank"
-                        style={{ color: "black" }}
+                        style={{ color: "white" }}
                       >
                         {" "}
                         <LabelIcon />
@@ -316,13 +320,13 @@ const Header = (props) => {
                 </ListItem>
 
                 {/* // phoneNumber in the side bar */}
-                <ListItem button key={phoneNumber}>
+                <ListItem  style={{ color: "white" }} button key={phoneNumber}>
                   <ListItemIcon>
                     <Tooltip title="Visit your WhatsApp web" arrow>
                       <a
                         href="https://web.whatsapp.com/"
                         target="_blank"
-                        style={{ color: "black" }}
+                        style={{ color: "white" }}
                       >
                         {" "}
                         <WhatsAppIcon />
@@ -346,13 +350,13 @@ const Header = (props) => {
               {/* create roooooooms */}
               <div
                 style={{
-                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                  backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
                 }}
               >
                 <div
                   style={{
                     backgroundImage:
-                      "linear-gradient(to right, #2c3e50,#3498db)",
+                      "linear-gradient(to right, #61045F, #61045F)",
                   }}
                 >
                   <IconButton
@@ -364,14 +368,14 @@ const Header = (props) => {
                     aria-label="show more"
                   >
                     {/* <ExpandMoreIcon /> */}
-                    <CommentIcon
+                    <GroupAddIcon
                       primary="Create Room"
-                      style={{ color: "black" }}
+                      style={{ color: "white" , marginLeft:"4px" ,  marginRight: "23px"}}
                     />
 
                     <ListItemText
                       primary="Create Rooms"
-                      style={{ color: "black" }}
+                      style={{ color: "white" }}
                     />
                   </IconButton>
 
@@ -379,7 +383,7 @@ const Header = (props) => {
                     <form onSubmit={createRoom}>
                       <label
                         htmlFor="roomName"
-                        style={{ color: "black" }}
+                        style={{ color: "white" }}
                       ></label>
                       <br />
                       <input
@@ -389,15 +393,15 @@ const Header = (props) => {
                       />
                       <button
                         style={{
-                          color: "black",
+                          color: "white",
                           backgroundImage:
-                            "linear-gradient(to right, #2c3e50,#3498db)",
+                            "linear-gradient(to right, #61045F, #61045F)",
                         }}
                         type="submit"
                         style={{
-                          color: "black",
+                          color: "white",
                           backgroundImage:
-                            "linear-gradient(to right, #2c3e50,#3498db)",
+                            "linear-gradient(to right, #61045F, #61045F)",
                         }}
                       >
                         Create
@@ -409,30 +413,40 @@ const Header = (props) => {
                   return (
                     <ul
                       style={{
-                        color: "black",
+                        color: "white",
                         backgroundImage:
-                          "linear-gradient(to right, #2c3e50,#3498db)",
+                          "linear-gradient(to right, #61045F, #61045F)",
                       }}
                     >
-                      <Link
+
+
+
+                      <button  style={{
+                          color: "white",
+                          backgroundImage:
+                            "linear-gradient(to right, #61045F, #61045F)",
+                        }} onClick={e =>{ navigate(`/${room._id}`);
+                        props.clickedOnRoom()
+                        }}>
+                      {/* <Link
                         to={`/${room._id}`}
                         style={{
-                          color: "black",
+                          color: "white",
                           backgroundImage:
-                            "linear-gradient(to right, #2c3e50,#3498db)",
+                            "linear-gradient(to right, #61045F, #61045F)",
                         }}
-                      >
+                      > */}
                         <li
                           style={{
-                            color: "black",
+                            color: "white",
                             backgroundImage:
-                              "linear-gradient(to right, #2c3e50,#3498db)",
+                              "linear-gradient(to right, #61045F, #61045F)",
                           }}
                           key={idx}
                         >
                           {room.roomName}
                         </li>
-                      </Link>
+                      </button>
                     </ul>
                   );
                 })}
@@ -443,28 +457,14 @@ const Header = (props) => {
               <Divider />
               <List
                 style={{
-                  backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+                  backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
                 }}
               >
-                {/* //Food Page */}
-                <ListItem button>
-                  <ListItemIcon>
-                    <FastfoodIcon />
-                  </ListItemIcon>
-                  <ListItemText onClick={foodPage} primary="Food Suggestion" />
-                </ListItem>
-
-                {/* //create room */}
-                <ListItem button>
-                  <ListItemIcon>
-                    <GroupAddIcon />
-                  </ListItemIcon>
-                  <ListItemText onClick={createRoom} primary="Create Room" />
-                </ListItem>
+                
                 {/* //About AXSOS */}
-                <ListItem button>
+                <ListItem style={{color:"white"}} button>
                   <ListItemIcon>
-                    <InfoIcon />
+                    <InfoIcon style={{color:"white"}} />
                   </ListItemIcon>
                   <ListItemText onClick={aboutAXSOS} primary="About AXSOS" />
                 </ListItem>
@@ -503,6 +503,7 @@ const Header = (props) => {
             </Drawer>
             
             <Typography variant="h6" className={classes.title}>
+            <Typography style={{marginLeft:"380px"}} variant="h6" className={classes.title}>
               {props.pageTitle}
             </Typography>
             <HomeIcon onClick={homeIcon} />

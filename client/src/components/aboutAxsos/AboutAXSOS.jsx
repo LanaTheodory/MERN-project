@@ -69,14 +69,15 @@ export default function BackToTop(props) {
       <CssBaseline />
       <AppBar>
         <Toolbar
+                 
           style={{
-            backgroundImage: "linear-gradient(to right, #2c3e50,#3498db)",
+            backgroundImage: "linear-gradient(to right, #61045F, #61045F)",
             justifyContent: "space-between",
           }}
         >
           <Typography variant="h6">About AXSOS Academy</Typography>
           <Link to="/home">
-            <HomeIcon style={{ float: "right" }} />
+            <HomeIcon style={{ float: "right", color: "white" }} />
           </Link>
         </Toolbar>
       </AppBar>
@@ -102,7 +103,7 @@ export default function BackToTop(props) {
         </Box>
       </Container>
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab color="white" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

@@ -16,6 +16,8 @@ const Login = (props) => {
         //console.log('userId' , res.data.user._id)
         Cookies.set("userId", res.data.user._id);
         Cookies.set("username", res.data.user.name);
+        Cookies.set("email", res.data.user.email);
+        Cookies.set("badgeNumber", res.data.user.badgeNumber);
         navigate("/home");
       })
       .catch(err=>{ setLoginerror("wrong email or password");

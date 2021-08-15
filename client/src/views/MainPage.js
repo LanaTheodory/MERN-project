@@ -19,14 +19,6 @@ const MainPage = (props) => {
 
   
   useEffect(() => {
-    console.log('Is this running?');
-    
-}, []);
-socket.emit("event_from_client","alaa")
-
-
-
-  useEffect(() => {
     axios
       .get("http://localhost:8000/api/room/" + (props.id))
       .then((res) => {
@@ -47,8 +39,13 @@ socket.emit("event_from_client","alaa")
         
       })
       .catch((err) => console.log(err));
-    }, [commentChange]);
+    }, [loaded]);
+
     
+ const clickedOnRoom = () =>{
+  setloaded(!loaded)
+ }
+ 
   //  console.log(comments , "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 const deletedPost = (postId) =>{
   const newPosts = posts.filter(post => post._id !== postId )
@@ -96,7 +93,7 @@ const commentAddChange =() => {
 
   return (
     <div>
-      <Header pageTitle={room.roomName} />
+      <Header clickedOnRoom={clickedOnRoom} pageTitle={room.roomName} />
       <div style={{ margin: "0 auto", width: "fit-content" }}>
         <CreatePost
           createContent={createNewPost}
