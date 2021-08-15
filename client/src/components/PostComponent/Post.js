@@ -15,6 +15,7 @@ import Comment from "../CommentComponent/Comment";
 import CreatePost from "./CreatePost";
 import axios from "axios";
 import Cookies from "js-cookie";
+import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,19 +41,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Post = ({ postId, content, comments, likes, user, createdAt }) => {
+const Post = ({ postId, content, comments, likes, user,commentAddChange, createdAt, deletedPost }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [comment, setComment] = useState(comments);
   const [liikes, setLiikes] = useState(likes);
   //const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    // axios.get("http://localhost:8000/api/comment").then((res) => {
-    //   setComment(res.data);
-    //setLoaded(true);
-    // });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("http://localhost:8000/api/comment").then((res) => {
+  //     setComment(res.data);
+  //   // setLoaded(true);
+  //   });
+  // }, []);
 
   const createNewComment = (newComment) => {
     const newComment1 = {
@@ -60,20 +61,24 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
       user: newComment.user,
       post: postId,
     };
+    
 
     axios.post("http://localhost:8000/api/comment", newComment1).then((res) => {
       setComment([...comment, res.data]);
+      
       const updatePost = {
-        comments: [...comment, res.data._id],
+        comments: [...comment, res.data],
       };
       axios
         .put("http://localhost:8000/api/post/" + postId, updatePost)
         .then((res) => {
           const updateUser = {
-            comments: [...comment, res.data._id],
+            comments: [...comment, res.data],
           };
+
+          const userId = Cookies.get("userId")
           axios
-            .put("http://localhost:8000/api/user/" + updateUser, updateUser)
+            .put("http://localhost:8000/api/user/" + userId, updateUser)
             .then((res) => console.log(res.data));
         });
     });
@@ -90,6 +95,7 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
 
     return [year, month, day].join('-');
 }
+commentAddChange()
 
   // const handelLikeClick = () =>{
   //   const newLike={
@@ -120,12 +126,18 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
     setExpanded(!expanded);
   };
 
+  const deletePost = () => {
+    axios.delete("http://localhost:8000/api/post/" + postId)
+    .then(res => deletedPost(res.data))
+  }
+
   return (
     <>
       {/* {loaded && ( */}
       <div>
         <Card className={classes.root}>
-          {console.log("2")}
+     
+         
           <CardHeader
             avatar={
               <img
@@ -134,9 +146,20 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
                 width="50px"
               ></img>
             }
-            title={user}
+            title={user.name}
             subheader={formatDate(createdAt)}
+       
+            
+          
           />
+
+          {/* delete button is here!!!!!!!!!!! */}
+               <IconButton onClick={deletePost} aria-label="">
+            <DeleteIcon /> 
+          </IconButton>
+
+       
+          {/* delete button endsss here!!!!!!!!!!! */}
 
           <CardContent>
             <Typography variant="h4" color="textSecondary" component="p">
@@ -175,14 +198,18 @@ const Post = ({ postId, content, comments, likes, user, createdAt }) => {
               <Typography paragraph>comments:</Typography>
               {/* map user comments here! */}
               {comment.length > 0 ? (
-                comment.map((com, i) => {
+                comment.map((comments, i) => {
+                  {console.log("comments:::::::" , comments )}
+
                   return (
+                   
                     <div>
                       <Comment
                         key={i}
-                        user={com.user}
-                        content={com.commentContent}
-                        createdAt={com.createdAt}
+                        user={comments.user}
+                        content={comments.commentContent}
+                        createdAt={comments.createdAt}
+                     
                       ></Comment>
                     </div>
                   );

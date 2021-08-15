@@ -56,7 +56,7 @@ export default function RecipeReviewCard() {
   return rooms.map((room, idx) => {
     return (
       <div style={{ display: "flex" }}>
-        <Card
+        {/* <Card
           style={{
             backgroundImage: "linear-gradient(to right, #5fc3e4,#e55d87)",
             display: "inherit",
@@ -101,7 +101,7 @@ export default function RecipeReviewCard() {
               aria-expanded={expanded}
             ></IconButton>
           </CardActions>
-        </Card>
+        </Card> */}
       </div>
     );
   });

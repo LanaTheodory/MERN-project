@@ -22,15 +22,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CommentIcon from "@material-ui/icons/Comment";
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
 import axios from "axios";
-import Cookies from "js-cookie";
+
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
 import LabelIcon from "@material-ui/icons/Label";
-// import PhoneIcon from "@material-ui/icons/Phone";
+
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import Tooltip from "@material-ui/core/Tooltip";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
@@ -38,6 +36,10 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import InfoIcon from "@material-ui/icons/Info";
 import { Collapse } from "@material-ui/core";
 import BackGroundHomePage from "./BackGroundHomePage";
+import Cookies from "js-cookie";
+
+
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -144,7 +146,8 @@ const Header = (props) => {
     };
     axios
       .post("http://localhost:8000/api/room", newRoom)
-      .then((res) => res.data)
+      .then((res) => { setRooms(res.data)})
+       
       .catch((err) => console.log(err));
   };
   const logout = (e) => {
@@ -522,8 +525,13 @@ const Header = (props) => {
           </Toolbar>
         </AppBar>
       </div>
-      
-  
+      <div
+        style={{
+          backgroundImage: "linear-gradient(to right, #5fc3e4,#e55d87)",
+        }}
+      >
+        <BackGroundHomePage />
+      </div>
     </>
   );
 };

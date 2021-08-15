@@ -6,10 +6,12 @@ import { Router } from "@reach/router";
 import MainPage from "./views/MainPage";
 import AboutAXSOS from "./components/aboutAxsos/AboutAXSOS";
 import MainMainPage from "./views/MainMainPage";
+import ScriptTag from 'react-script-tag';
 
 // import { Slider } from "@material-ui/core";
 
 function App() {
+  <ScriptTag src="./socket.js" />
   return (
     //   {/* <Header/> */}
     <Router>

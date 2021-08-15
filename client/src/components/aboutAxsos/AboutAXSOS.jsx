@@ -75,7 +75,7 @@ export default function BackToTop(props) {
           }}
         >
           <Typography variant="h6">About AXSOS Academy</Typography>
-          <Link to="/">
+          <Link to="/home">
             <HomeIcon style={{ float: "right" }} />
           </Link>
         </Toolbar>

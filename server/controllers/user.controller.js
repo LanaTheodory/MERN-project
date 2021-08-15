@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 require("dotenv").config();
 
 module.exports.findUser = (req, res) => {
-    User.findOne({ _id: req.params.id })
+    User.findOne({ _id: req.params.id }).populate("posts").populate("comments")
         .then(user => res.json(user))
         .catch(err => res.json(err))
 }
@@ -34,6 +34,18 @@ module.exports.register = (req, res) => {
         })
         .catch(err => res.status(400).json(err));
 }
+
+/// update
+
+
+module.exports.updateUser = (request, response) => {
+    Product.findOneAndUpdate({_id: request.params.id} ,request.body, {new:true , runValidators: true} )
+    .populate("posts").populate("comments")
+    .then(updatedPerson => response.json(updatedPerson))
+    .catch(err => response.json(err))
+}
+
+
 
 module.exports.login = async(req, res) => {
     const user = await User.findOne({ email: req.body.email })
