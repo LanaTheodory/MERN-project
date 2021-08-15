@@ -1,5 +1,6 @@
-require('dotenv').config({path:__dirname+'/.env'});
+require('dotenv').config({path:__dirname+'/.env'}); 
 const express = require('express');
+const socket = require("socket.io");
 const cors = require('cors');
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -23,16 +24,28 @@ console.log('The server is all fired up on port 8000')
 );
 
 
-const io = require('socket.io')(server, { cors: true });
-io.on("connection", socket => {
-  console.log("Made socket connection");
 
-  socket.on("disconnect",  ()=> {
-    console.log("Made socket disconnected");
-  });
+io = socket(server);
 
-  socket.on("send-notification",(data)=> {
-    io.emit("new-notification", data);
-  });
 
+io.on("connection", socket =>{
+  
+    console.log("A new user has joined");
+    socket.emit("Welcome", "hiiii");
+    
 });
+
+
+// const io = require('socket.io')(server, { cors: true });
+// io.on("connection", socket => {
+//   console.log("Made socket connection");
+
+//   socket.on("disconnect",  ()=> {
+//     console.log("Made socket disconnected");
+//   });
+
+//   socket.on("send-notification",(data)=> {
+//     io.emit("new-notification", data);
+//   });
+
+// });

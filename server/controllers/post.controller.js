@@ -11,8 +11,9 @@ module.exports.createPost = (request, response) => {
     user,
     room
   })
-    .then(async function(Post){
-      const post=await Post.populate('user').execPopulate();
+    .then( async function(Post){
+       const post=await Post.populate('user').populate('comments').execPopulate()
+       console.log(post , "llllllllllllllllllllllllllllllllllllllllll")
       return response.json(post);
     })
     .catch((err) => {
@@ -25,19 +26,12 @@ module.exports.createPost = (request, response) => {
 
 module.exports.getAllPosts = (request, response) => {
   Post.find({})
+    .populate({ path: "comments" , populate:{ path: "user" }})
+    .populate("likes")
     .populate("user")
-    .populate({
-      path: "comments",
-      // Get friends of friends - populate the 'friends' array for every friend
-      populate: { path: "user" },
-    })
-    .populate({
-      path: "likes",
-      // Get friends of friends - populate the 'friends' array for every friend
-      populate: { path: "post_id" },
-    })
+   
 
-    // .populate("likes")
+/////////// .populate("likes")
     .then((Posts) => response.json(Posts))
     .catch((err) => response.json(err));
 };
@@ -57,7 +51,7 @@ module.exports.updatePost = (request, response) => {
   Post.findOneAndUpdate({ _id: request.params.id }, request.body, {
     new: true,
     runValidators: true,
-  })
+  }) .populate("comments").populate("user")
     .then((updatedPerson) => response.json(updatedPerson))
     .catch((err) => response.json(err));
 };

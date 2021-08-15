@@ -11,8 +11,13 @@ module.exports.createRoom = (req, res) => {
     })
 
     .then(async function(Room) {
-            const room = await Room.populate('posts').populate('user').execPopulate();
-            return response.json(room);
+            const room = await Room .populate({
+                path: "posts",
+                populate: { path: "comments" },
+              }).populate('user').execPopulate();
+              console.log("rooooooooooommmmmmmmssssssss")
+              console.log(room)
+            return response.json(room, "hiiiiiiiiiii");
         })
         .catch(err => res.status(400).json(err))
 }
@@ -23,7 +28,7 @@ module.exports.getAllRooms = (req, res) => {
     Room.find({}).populate({
         path: "posts",
        
-        populate: { path: "user" },
+        populate: { path: "comments" },
       }).populate("user")
         .then(room => res.json(room))
         .catch(err => err.json(err))
@@ -33,11 +38,8 @@ module.exports.getAllRooms = (req, res) => {
 
 ////// find one room
 module.exports.getOneRoom = (req, res) => {
-    Room.findOne({ _id: req.params.id }).populate({
-        path: "posts",
-       
-        populate: { path: "user" },
-      }).populate("user")
+    Room.findOne({ _id: req.params.id }).populate({ path: "posts" , populate:{ path: "comments" }}).populate({ path: "posts" , populate:{ path: "user" }}).populate({ path: "posts" , populate:{ path: "comments"  , populate: {path:"user"}}})
+    .populate("user")
         .then(room => res.json(room))
         .catch(err => res.json(err))
 }
@@ -52,7 +54,7 @@ module.exports.deleteRoom = (req, res) => {
 
 ////// update room
 module.exports.updateRoom = (req,res) => {
-    Room.findOneAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true})
+    Room.findOneAndUpdate({_id: req.params.id}, req.body, {new:true, runValidators:true}).populate("posts").populate("user")
         .then(updatedRoom => res.json(updatedRoom))
         .catch(err => res.status(400).json(err))
 } 

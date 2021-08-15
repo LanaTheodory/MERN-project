@@ -24,7 +24,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 
 import { Link } from "@reach/router";
 import axios from "axios";
-import Cookies from "js-cookie";
+
 import EmailIcon from "@material-ui/icons/Email";
 import PersonIcon from "@material-ui/icons/Person";
 import LabelIcon from "@material-ui/icons/Label";
@@ -36,6 +36,10 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import InfoIcon from "@material-ui/icons/Info";
 import { Collapse } from "@material-ui/core";
 import BackGroundHomePage from "./BackGroundHomePage";
+import Cookies from "js-cookie";
+
+
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,7 +138,8 @@ const Header = (props) => {
     };
     axios
       .post("http://localhost:8000/api/room", newRoom)
-      .then((res) => res.data)
+      .then((res) => { setRooms(res.data)})
+       
       .catch((err) => console.log(err));
   };
   const logout = (e) => {

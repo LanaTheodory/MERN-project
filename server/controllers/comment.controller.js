@@ -11,7 +11,7 @@ module.exports.createComment = (request, response) => {
   })
 
   .then(async function(Comment){
-    const comment=await Comment.populate('user').execPopulate();
+    const comment=await Comment.populate('user')
     return response.json(comment);
   })
     

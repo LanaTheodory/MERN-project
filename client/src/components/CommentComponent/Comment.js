@@ -43,9 +43,12 @@ const Comment = ({ content, user, createdAt }) => {
     return [year, month, day].join('-');
 }
 
-
   return (
     <div>
+     <div> {
+         console.log(user , "aaaaaaaaaaaaaaaaaaaaa")
+        
+      }</div>
       <div className={classes.root}>
         <CardHeader
           avatar={
@@ -58,6 +61,7 @@ const Comment = ({ content, user, createdAt }) => {
           title={user.name}
           subheader={formatDate(createdAt)}
         />
+
         <CardContent>
           <Typography variant="h6" color="textSecondary" component="p">
             {content}
