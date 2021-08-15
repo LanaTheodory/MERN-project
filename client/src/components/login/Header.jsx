@@ -115,6 +115,7 @@ const Header = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [rooms, setRooms] = useState([]);
+  const [users,setUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -122,10 +123,17 @@ const Header = (props) => {
       .then((res) => setRooms(res.data))
       .catch((err) => console.log(err));
   }, []);
+  
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const homeIcon = (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/home");
   };
 
   const createRoom = (e) => {
@@ -467,6 +475,30 @@ const Header = (props) => {
               ))} */}
               </List>
             </Drawer>
+            <Drawer
+              className={classes.drawer}
+              variant="persistent"
+              anchor="right"
+              open={open}
+              style={{
+                backgroundImage: "inherit"
+              }}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+            >
+              
+              <h3 style={{marginLeft:"70px"}}>All Users</h3>
+              {users.map((user,idx) => {
+                return (
+                  <ul>
+                    <h2><li key={idx}>{user.name}</li></h2>
+                  </ul>
+                )
+              })}
+    
+            </Drawer>
+            
             <Typography variant="h6" className={classes.title}>
               {props.pageTitle}
             </Typography>
