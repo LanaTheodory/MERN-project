@@ -14,9 +14,10 @@ Here in our webstie we aim to connect all the students in AXSOS academy so they 
 Main Functions 
 ------------ | 
 -Authantication.
--Soket-io(display the notification).
--Main Page.
 -Custom Rooms.
+-Posts
+-Comments
+-Likes
 
 
 
@@ -27,15 +28,10 @@ Main Functions
 ![pic]()
 
 
-## :two: Soket-io
-:white_circle: Here in this page we will show you soket-io function.
-
-
-![pic]()
 
 
 
-## :three: Main Page
+## :two: Main Page
 :white_circle: Here in this page we display the main page.
 
 
@@ -46,7 +42,7 @@ Main Functions
 
 
 
-## :four: Custom Rooms
+## :three: Custom Rooms
 :white_circle: Here in these pages we will show the Custum Rooms.
 
 
@@ -66,7 +62,7 @@ Main Functions
 
 ## Contact us on :
 
-###### :small_red_triangle_down: Mobile number 0599000000 :mobile_phone:
+###### :small_red_triangle_down: lanatheodory@gmail.com
 
-###### :small_red_triangle_down: Mobile number 0592111111 :mobile_phone:
-###### :small_red_triangle_down: Phone       02-2950000    :telephone:
+###### :small_red_triangle_down: Omardakka42@gmail.com
+###### :small_red_triangle_down: yousefnour809@gmail.com
