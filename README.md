@@ -13,7 +13,7 @@ Here in our webstie we aim to connect all the students in AXSOS academy so they 
 ## Our functions
 Main Functions 
 ------------ | 
--Authantication.
+-Authentication.
 -Custom Rooms.
 -Posts
 -Comments
@@ -22,8 +22,8 @@ Main Functions
 
 
 
-##  :one:  Authontication 
-:white_circle: Login Regestration page.
+##  :one:  Authentication 
+:white_circle: Login Registration page.
 
 ![pic]()
 
